@@ -1,0 +1,35 @@
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.exe
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.deps.json
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.runtimeconfig.json
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.runtimeconfig.dev.json
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.dll
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.pdb
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.Views.dll
+C:\Users\EIMDADUL\Desktop\Blog Site Core\bin\Debug\netcoreapp3.1\Blog Site Core.Views.pdb
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.csprojAssemblyReference.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.AssemblyInfoInputs.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.AssemblyInfo.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.csproj.CoreCompileInputs.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.RazorAssemblyInfo.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.RazorAssemblyInfo.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\staticwebassets\Blog Site Core.StaticWebAssets.Manifest.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\staticwebassets\Blog Site Core.StaticWebAssets.xml
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\scopedcss\bundle\Blog Site Core.styles.css
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.TagHelpers.input.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.TagHelpers.output.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.RazorCoreGenerate.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\index.cshtml.g.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.RazorTargetAssemblyInfo.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.RazorTargetAssemblyInfo.cs
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.Views.pdb
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.dll
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.pdb
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.genruntimeconfig.cache
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.csproj.CopyComplete
+C:\Users\EIMDADUL\Desktop\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\post.cshtml.g.cs
