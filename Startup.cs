@@ -25,6 +25,7 @@ namespace Blog_Site_Core
         {
             services.AddDbContext<appDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
             services.AddMvc();
+            services.AddTransient<IRepositoty, Repository>();
         }
 
    

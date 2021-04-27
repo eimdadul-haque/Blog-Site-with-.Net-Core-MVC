@@ -1,4 +1,5 @@
-﻿using Blog_Site_Core.Models;
+﻿using Blog_Site_Core.Data;
+using Blog_Site_Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace Blog_Site_Core.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRepositoty _repo;
+        public HomeController(IRepositoty repo)
+        {
+            _repo = repo;
+        }
+
        public IActionResult Index()
         {
             return View();
@@ -22,14 +29,22 @@ namespace Blog_Site_Core.Controllers
 
         [HttpGet]
         public IActionResult Edit()
-        {
+        {   
             return View();
         }
 
         [HttpPost]
-        public IActionResult Edit(postModel postModel)
+        public async Task<IActionResult>  Edit(postModel postModel)
         {
-            return View();
+            _repo.AddPost(postModel);
+            if (await _repo.SaveChangesAsync())
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(postModel);
+            }
         }
     }
 }
