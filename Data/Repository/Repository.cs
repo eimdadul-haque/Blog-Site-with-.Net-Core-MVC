@@ -19,7 +19,7 @@ namespace Blog_Site_Core.Data
             _ctx.postModelD.Add(postModel);
         }
 
-        public List<postModel> GetAllPost(int id)
+        public List<postModel> GetAllPost()
         {
             return _ctx.postModelD.ToList();
         }

@@ -10,7 +10,7 @@ namespace Blog_Site_Core.Data
     public interface IRepositoty
     {
         postModel GetPost(int id);
-        List<postModel> GetAllPost(int id);
+        List<postModel> GetAllPost();
         void AddPost(postModel postModel);
         void UpdatePost(postModel postModel);
         void RemovePost(int id);

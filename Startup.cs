@@ -1,7 +1,9 @@
 using Blog_Site_Core.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+ 
 namespace Blog_Site_Core
 {
     public class Startup
@@ -26,6 +28,9 @@ namespace Blog_Site_Core
             services.AddDbContext<appDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
             services.AddMvc();
             services.AddTransient<IRepositoty, Repository>();
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<appDbContext>();
         }
 
    
@@ -37,6 +42,7 @@ namespace Blog_Site_Core
             }
 
             app.UseRouting();
+            app.UseAuthorization();
 
 
             app.UseEndpoints(endpoints =>

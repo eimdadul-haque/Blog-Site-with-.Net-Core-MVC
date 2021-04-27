@@ -17,26 +17,46 @@ namespace Blog_Site_Core.Controllers
             _repo = repo;
         }
 
-       public IActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            var postList = _repo.GetAllPost();
+            return View(postList);
         }
 
-        public IActionResult post()
+        public IActionResult post(int id)
         {
-            return View();
+            var post = _repo.GetPost(id);
+            return View(post);
         }
 
         [HttpGet]
-        public IActionResult Edit()
-        {   
-            return View();
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+            else
+            {
+                var post = _repo.GetPost((int)id);
+                return View(post);
+            }
+
         }
 
         [HttpPost]
-        public async Task<IActionResult>  Edit(postModel postModel)
+        public async Task<IActionResult> Edit(postModel postModel)
         {
-            _repo.AddPost(postModel);
+            if (postModel.Id > 0)
+            {
+                _repo.UpdatePost(postModel);
+            }
+            else
+            {
+                _repo.AddPost(postModel);
+
+            }
+
             if (await _repo.SaveChangesAsync())
             {
                 return RedirectToAction(nameof(Index));
@@ -46,5 +66,14 @@ namespace Blog_Site_Core.Controllers
                 return View(postModel);
             }
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            _repo.RemovePost(id);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
