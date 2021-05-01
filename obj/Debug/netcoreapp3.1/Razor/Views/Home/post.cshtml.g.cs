@@ -19,8 +19,15 @@ using Blog_Site_Core.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\EIMDADUL\Desktop\Blog Site Core\Views\_ViewImports.cshtml"
+using Blog_Site_Core.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4063d54d4db7fad04813dc8d42b93775a1a16d57", @"/Views/Home/post.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7d95744c515e68d76a9ee10d5b5d9cbc78bccb00", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f294953d0c9a579e316c7f012ca3b845fe15a5ae", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_post : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<postModel>
     {
         #pragma warning disable 1998

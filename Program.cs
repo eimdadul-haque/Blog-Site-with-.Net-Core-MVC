@@ -32,7 +32,7 @@ namespace Blog_Site_Core
                     roleMng.CreateAsync(adminRole).GetAwaiter().GetResult();
                 }
                 
-                if (!ctx.Users.Any(u =>u.UserName == "admin "))
+                if (!ctx.Users.Any(u =>u.UserName == "admin"))
                 {
                     var adminUser = new IdentityUser { 
                     
@@ -41,8 +41,8 @@ namespace Blog_Site_Core
 
                     };
 
-                    userMng.CreateAsync(adminUser,"password").GetAwaiter().GetResult();
-                    userMng.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
+                    var result = userMng.CreateAsync(adminUser,"password").GetAwaiter().GetResult();
+                     userMng.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
                 }
             }
             catch (Exception e)

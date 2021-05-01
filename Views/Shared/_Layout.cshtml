@@ -8,7 +8,18 @@
 <body>
     <div>
         <a asp-controller="Home" asp-action="Index">Home</a>
-        <a asp-controller="Home" asp-action="Edit">Edit</a>
+        <a asp-controller="Home" asp-action="Edit">Create</a>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Auth" asp-action="Logout">Logout</a>
+        }
+        else
+        {
+            <a asp-controller="Auth" asp-action="Login">Login</a>
+        }
+
+
     </div>
     <div>
         @RenderBody()

@@ -32,7 +32,7 @@ namespace Blog_Site_Core
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 6;
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<appDbContext>();
@@ -46,8 +46,10 @@ namespace Blog_Site_Core
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCookiePolicy();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseAuthentication();
 
 
             app.UseEndpoints(endpoints =>

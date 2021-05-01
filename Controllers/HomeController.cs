@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog_Site_Core.Controllers
 {
+  
     public class HomeController : Controller
     {
         private readonly IRepositoty _repo;
