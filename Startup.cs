@@ -26,16 +26,24 @@ namespace Blog_Site_Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<appDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
-            services.AddMvc();
-            services.AddTransient<IRepositoty, Repository>();
-            services.AddDefaultIdentity<IdentityUser>(options => {
+           
+
+           
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options => {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
             })
-                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<appDbContext>();
+  
+            services.ConfigureApplicationCookie(options => {
+                options.LoginPath = "/Auth/Login";
+            });
+
+            services.AddTransient<IRepositoty, Repository>();
+            services.AddMvc();
         }
 
    
