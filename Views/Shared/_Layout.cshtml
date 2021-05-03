@@ -2,25 +2,33 @@
 
 <html>
 <head>
+    <link href="~/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">EH</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-item nav-link" asp-controller="Panel" asp-action="Index">Admin Panel</a>
+                    <a class="nav-item nav-link" asp-controller="Panel" asp-action="Edit">Create</a>
+                    <a class="nav-item nav-link " asp-controller="Auth" asp-action="Logout">Logout</a>
+                }
+                else
+                {
+                    <a class="nav-item nav-link " asp-controller="Auth" asp-action="Login">Login</a>
+              }
+            </div>
+        </div>
+    </nav>
     <div>
 
 
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
-            <a asp-controller="Home" asp-action="Index">Home</a>
-            <a asp-controller="Panel" asp-action="Edit">Create</a>
-            <a asp-controller="Auth" asp-action="Logout">Logout</a>
-        }
-        else
-        {
-            <a asp-controller="Auth" asp-action="Login">Login</a>
-        }
 
 
     </div>

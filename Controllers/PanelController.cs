@@ -7,16 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Blog_Site_Core.Data;
 using Blog_Site_Core.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Blog_Site_Core.Controllers
 {
 
+    [Authorize(Roles ="Admin")]
     public class PanelController : Controller
     {
         private readonly IRepositoty _repo;
-        public PanelController(IRepositoty repo)
+        private readonly IWebHostEnvironment _iweb;
+
+        public PanelController(IRepositoty repo, IWebHostEnvironment iweb)
         {
             _repo = repo;
+            _iweb = iweb;
         }
 
         public IActionResult Index()
@@ -43,6 +49,27 @@ namespace Blog_Site_Core.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(postModel postModel)
         {
+         
+
+            if (postModel.Image != null)
+            {
+                string wwwRootPath = _iweb.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(postModel.Image.FileName);
+                string extension = Path.GetExtension(postModel.Image.FileName);
+                postModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                string path = Path.Combine(wwwRootPath + "/image/",fileName);
+
+                using (var fileStrem = new FileStream(path, FileMode.Create))
+                {
+                    await postModel.Image.CopyToAsync(fileStrem);
+                }
+            }
+            else
+            {
+                postModel.ImageName = "default.jpg";
+
+            }
+
             if (postModel.Id > 0)
             {
                 _repo.UpdatePost(postModel);

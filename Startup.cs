@@ -56,8 +56,11 @@ namespace Blog_Site_Core
 
             app.UseCookiePolicy();
             app.UseRouting();
-            app.UseAuthorization();
+
             app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseStaticFiles();
+        
 
 
             app.UseEndpoints(endpoints =>
