@@ -7,6 +7,8 @@
 <div>
     <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
+        <input asp-for="ImageName" type="hidden" />
+
         <div>
             <label>Title</label>
             <input asp-for="Title" />

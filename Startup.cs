@@ -12,7 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
- 
+using Microsoft.AspNetCore.Razor.Runtime;
+
 namespace Blog_Site_Core
 {
     public class Startup
@@ -43,7 +44,8 @@ namespace Blog_Site_Core
             });
 
             services.AddTransient<IRepositoty, Repository>();
-            services.AddMvc();
+            services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews();
         }
 
    
