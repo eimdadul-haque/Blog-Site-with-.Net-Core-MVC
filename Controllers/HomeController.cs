@@ -12,21 +12,21 @@ namespace Blog_Site_Core.Controllers
   
     public class HomeController : Controller
     {
-        private readonly IRepositoty _repo;
-        public HomeController(IRepositoty repo)
+        private readonly appDbContext _db;
+        public HomeController(appDbContext db)
         {
-            _repo = repo;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            var postList = _repo.GetAllPost();
-            return View(postList);
+            return View(_db.postModelD.ToList());
         }
 
         public IActionResult post(int id)
         {
-            return View(_repo.GetPost(id));
+            var post = _db.postModelD.Find(id);
+            return View(post);
         }
 
 

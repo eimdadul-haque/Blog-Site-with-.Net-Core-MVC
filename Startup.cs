@@ -43,7 +43,6 @@ namespace Blog_Site_Core
                 options.LoginPath = "/Auth/Login";
             });
 
-            services.AddTransient<IRepositoty, Repository>();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
         }
