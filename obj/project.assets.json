@@ -6125,11 +6125,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Blog Site Core.csproj",
+      "projectUniqueName": "C:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Blog Site Core.csproj",
       "projectName": "Blog Site Core",
-      "projectPath": "C:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Blog Site Core.csproj",
+      "projectPath": "C:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Blog Site Core.csproj",
       "packagesPath": "C:\\Users\\EIMDADUL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\obj\\",
+      "outputPath": "C:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\EIMDADUL\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6204,7 +6204,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

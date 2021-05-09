@@ -51,7 +51,7 @@ namespace Blog_Site_Core.Controllers
 
             if (ModelState.IsValid)
             {
-
+                
             }
 
 
@@ -82,6 +82,8 @@ namespace Blog_Site_Core.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            
 
         }
 

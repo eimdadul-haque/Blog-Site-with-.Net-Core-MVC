@@ -5,13 +5,48 @@
 }
 <div>Home</div>
 
-<div>
-    <ul>
+<div class="container">
+    <div class="row">
+
         @foreach (var post in Model)
         {
-        <li>
-            <a asp-controller="Home" asp-action="post" asp-route-id="@post.Id">@post.Title</a>
-        </li>
+        <div class="col-4">
+            <a asp-controller="Home" asp-action="post" asp-route-id="@post.Id" class="card mt-1 mb-1">
+               <img src="@("~/image/"+post.ImageName)" class="card-img-top" height="300px" width="300px"  asp-append-version="true" />
+               <div class="card-body">
+                   @post.Title
+               </div>
+            </a>
+        </div>
         }
-    </ul>
+    </div>
+
 </div>
+
+<footer class="bg-dark">
+    <div class="container ">
+        <div class="row text-white">
+            <div class="col-4 d-flex flex-column text-center mt-5">
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+            </div>
+            <div class="col-4 d-flex flex-column text-center mt-5">
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+            </div>
+            <div class="col-4 d-flex flex-column text-center mt-5">
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+                <a>Hello</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+

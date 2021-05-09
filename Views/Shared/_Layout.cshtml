@@ -22,7 +22,8 @@
                 else
                 {
                     <a class="nav-item nav-link " asp-controller="Auth" asp-action="Login">Login</a>
-              }
+                    <a class="nav-item nav-link " asp-controller="Auth" asp-action="SignUp">Sign Up</a>
+                }
             </div>
         </div>
     </nav>
@@ -35,5 +36,6 @@
     <div>
         @RenderBody()
     </div>
+    @RenderSection("scripts", false)
 </body>
 </html>

@@ -3,26 +3,41 @@
 @{
 
 }
+<link href="~/lib/Trumbowyg-master/dist/ui/trumbowyg.min.css" rel="stylesheet" />
 
-<div>
-    <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="Id" />
-        <input asp-for="ImageName" type="hidden" />
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12">
+            <div>
+                <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <input asp-for="ImageName" type="hidden" />
 
-        <div>
-            <label>Title</label>
-            <input asp-for="Title" />
+                    <div>
+                        <label>Title</label>
+                        <input asp-for="Title" />
+                    </div>
+                    <div>
+                        <label>Body</label>
+                        <textarea id="trumbowyg-demo" asp-for="Body"></textarea>
+                    </div>
+                    <div>
+                        <label asp-for="Image"></label>
+                        <input asp-for="Image" />
+                    </div>
+                    <div>
+                        <input type="submit" value="submit" />
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label>Body</label>
-            <input asp-for="Body" />
-        </div>
-        <div>
-            <label asp-for="Image"></label>
-            <input asp-for="Image" />
-        </div>
-        <div>
-            <input type="submit" value="submit" />
-        </div>
-    </form>
+    </div>
 </div>
+
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/lib/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+    <script>
+        $('#trumbowyg-demo').trumbowyg();
+    </script>
+}

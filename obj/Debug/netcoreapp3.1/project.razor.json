@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Blog Site Core.csproj",
+  "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Blog Site Core.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14402,33 +14402,48 @@
   "RootNamespace": "Blog_Site_Core",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\Home\\Edit.cshtml",
-      "TargetPath": "Views\\Home\\Edit.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Panel\\Edit.cshtml",
+      "TargetPath": "Views\\Panel\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\Home\\Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Panel\\Index.cshtml",
+      "TargetPath": "Views\\Panel\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\Home\\post.cshtml",
-      "TargetPath": "Views\\Home\\post.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Auth\\Login.cshtml",
+      "TargetPath": "Views\\Auth\\Login.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\Shared\\_Layout.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\_ViewImports.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Blog Site Core\\Views\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Auth\\SignUp.cshtml",
+      "TargetPath": "Views\\Auth\\SignUp.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\EIMDADUL\\Desktop\\Current Project\\Blog Site Core\\Views\\Home\\post.cshtml",
+      "TargetPath": "Views\\Home\\post.cshtml",
       "FileKind": "mvc"
     }
   ],
