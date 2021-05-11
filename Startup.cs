@@ -45,7 +45,7 @@ namespace Blog_Site_Core
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseCookiePolicy();
             app.UseRouting();
 

@@ -1,5 +1,6 @@
 ﻿using Blog_Site_Core.Data;
 using Blog_Site_Core.Models;
+using Blog_Site_Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,25 @@ namespace Blog_Site_Core.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber)
         {
-            return View(_db.postModelD.Include(c=>c.categoryModel ).Take(6).ToList());
+            if(pageNumber < 1)
+            {
+                return RedirectToAction("Index", new { pageNumber = 1 });
+            }
+
+            int pageSize = 6;
+            var viewModel = new PageNumModel
+            {
+                pageNum = pageNumber,
+                post = _db.postModelD.Include(c => c.categoryModel)
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .ToList()
+            };
+
+           
+            return View(viewModel);
         }
 
         public IActionResult post(int id)

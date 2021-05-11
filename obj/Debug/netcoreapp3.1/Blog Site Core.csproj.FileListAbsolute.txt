@@ -771,5 +771,5 @@ C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1
 C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.dll
 C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.pdb
 C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.genruntimeconfig.cache
-C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.csprojAssemblyReference.cache
 C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Razor\Views\Auth\SignUp.cshtml.g.cs
+C:\Users\EIMDADUL\Desktop\Current Project\Blog Site Core\obj\Debug\netcoreapp3.1\Blog Site Core.csprojAssemblyReference.cache

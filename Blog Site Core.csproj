@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Blog_Site_Core</RootNamespace>
+    <UserSecretsId>02e255a6-e0ae-4c25-b8d3-dfd43264a38b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
