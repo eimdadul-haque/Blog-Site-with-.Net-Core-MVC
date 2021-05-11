@@ -14,6 +14,7 @@
             <a asp-controller="Home" asp-action="post" asp-route-id="@post.Id" class="card mt-1 mb-1">
                <img src="@("~/image/"+post.ImageName)" class="card-img-top" height="300px" width="300px"  asp-append-version="true" />
                <div class="card-body">
+                   @post.categoryModel.category
                    @post.Title
                </div>
             </a>

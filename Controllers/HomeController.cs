@@ -1,6 +1,7 @@
 ﻿using Blog_Site_Core.Data;
 using Blog_Site_Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Blog_Site_Core.Controllers
 
         public IActionResult Index()
         {
-            return View(_db.postModelD.ToList());
+            return View(_db.postModelD.Include(c=>c.categoryModel ).Take(6).ToList());
         }
 
         public IActionResult post(int id)

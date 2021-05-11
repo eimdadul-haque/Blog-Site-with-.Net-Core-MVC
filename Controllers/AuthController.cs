@@ -30,21 +30,25 @@ namespace Blog_Site_Core.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(loginModel.UserName);
-                var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+                var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
 
-                if (isAdmin)
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Panel");
+                    var user = await _userManager.FindByNameAsync(loginModel.UserName);
+                    var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "Panel");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+
             }
 
             return View(loginModel);

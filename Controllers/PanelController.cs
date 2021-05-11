@@ -9,6 +9,7 @@ using Blog_Site_Core.Data;
 using Blog_Site_Core.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Blog_Site_Core.Controllers
 {
@@ -35,6 +36,7 @@ namespace Blog_Site_Core.Controllers
         {
             if (id == null)
             {
+                ViewData["CategoryId"] = new SelectList(_db.categoryModelD.ToList(), "Id", "category");
                 return View();
             }
             else

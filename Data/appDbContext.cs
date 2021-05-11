@@ -16,5 +16,8 @@ namespace Blog_Site_Core.Data
 
         }
         public DbSet<postModel> postModelD { get; set; }
+        public DbSet<categoryModel> categoryModelD { get; set; }
     }
 }
+
+

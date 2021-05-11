@@ -17,8 +17,22 @@ namespace Blog_Site_Core
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            createAdmin(host);
+            host.Run();
+        }
 
-            try {
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+
+
+        public static void createAdmin(IHost host)
+        {
+            try
+            {
                 var scope = host.Services.CreateScope();
                 var ctx = scope.ServiceProvider.GetRequiredService<appDbContext>();
                 var userMng = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
@@ -31,33 +45,25 @@ namespace Blog_Site_Core
                 {
                     roleMng.CreateAsync(adminRole).GetAwaiter().GetResult();
                 }
-                
-                if (!ctx.Users.Any(u =>u.UserName == "admin"))
+
+                if (!ctx.Users.Any(u => u.UserName == "admin"))
                 {
-                    var adminUser = new IdentityUser { 
-                    
+                    var adminUser = new IdentityUser
+                    {
+
                         UserName = "admin",
                         Email = "admin@test.com"
 
                     };
 
-                    var result = userMng.CreateAsync(adminUser,"password").GetAwaiter().GetResult();
-                     userMng.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
+                    var result = userMng.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
+                    userMng.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            
-            host.Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }

@@ -18,6 +18,14 @@
                         <input asp-for="Title" />
                     </div>
                     <div>
+                        <label asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId"></select>
+                    </div>
+                    <div>
+                        <label>Tags</label>
+                        <input asp-for="Tags" />
+                    </div>
+                    <div>
                         <label>Body</label>
                         <textarea id="trumbowyg-demo" asp-for="Body"></textarea>
                     </div>
