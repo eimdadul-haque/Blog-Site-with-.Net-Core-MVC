@@ -32,9 +32,12 @@ namespace Blog_Site_Core.Controllers
             double tempMaxPage = totalPost / pageSize;
             var maxPage = Math.Round(tempMaxPage, 0, MidpointRounding.ToEven);
 
-            if (maxPage % 2 != 0)
+            if ((maxPage % 1) > 0)
             {
-                maxPage = maxPage + 1;
+                if (maxPage % 2 != 0)
+                {
+                    maxPage = maxPage + 1;
+                }
             }
 
             if (pageNumber > maxPage)
@@ -44,6 +47,7 @@ namespace Blog_Site_Core.Controllers
 
             var viewModel = new PageNumModel
             {
+                maxPage = maxPage,
                 pageNum = pageNumber,
                 post = _db.postModelD.Include(c => c.categoryModel)
                 .Skip((int)(pageSize * (pageNumber - 1)))
