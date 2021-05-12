@@ -9,7 +9,7 @@ namespace Blog_Site_Core.ViewModels
 {
     public class PageNumModel
     {
-        public int pageNum { get; set; }
+        public double pageNum { get; set; }
         public List<postModel> post { get; set; }
     }
 }

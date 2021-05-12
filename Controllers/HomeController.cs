@@ -20,20 +20,34 @@ namespace Blog_Site_Core.Controllers
             _db = db;
         }
 
-        public IActionResult Index(int pageNumber)
+        public IActionResult Index(double pageNumber)
         {
             if(pageNumber < 1)
             {
                 return RedirectToAction("Index", new { pageNumber = 1 });
             }
 
-            int pageSize = 6;
+            double pageSize = 6;
+            double totalPost = _db.postModelD.Count();
+            double tempMaxPage = totalPost / pageSize;
+            var maxPage = Math.Round(tempMaxPage, 0, MidpointRounding.ToEven);
+
+            if (maxPage % 2 != 0)
+            {
+                maxPage = maxPage + 1;
+            }
+
+            if (pageNumber > maxPage)
+            {
+                pageNumber = maxPage;
+            }
+
             var viewModel = new PageNumModel
             {
                 pageNum = pageNumber,
                 post = _db.postModelD.Include(c => c.categoryModel)
-                .Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize)
+                .Skip((int)(pageSize * (pageNumber - 1)))
+                .Take((int)pageSize)
                 .ToList()
             };
 
