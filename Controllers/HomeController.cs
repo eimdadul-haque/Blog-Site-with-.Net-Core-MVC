@@ -29,21 +29,32 @@ namespace Blog_Site_Core.Controllers
 
             double pageSize = 6;
             double totalPost = _db.postModelD.Count();
-            double tempMaxPage = totalPost / pageSize;
-            var maxPage = Math.Round(tempMaxPage, 0, MidpointRounding.ToEven);
+            double tempMaxPage = (double)(totalPost / pageSize);
+            double maxPage = Math.Floor(tempMaxPage);
 
-            if ((maxPage % 1) > 0)
+            if ((tempMaxPage % 1) > 0)
             {
-                if (maxPage % 2 != 0)
-                {
-                    maxPage = maxPage + 1;
-                }
+               maxPage = maxPage + 1;
             }
 
             if (pageNumber > maxPage)
             {
                 pageNumber = maxPage;
             }
+
+            //var maxPage = Math.Round(tempMaxPage, 0, MidpointRounding.ToEven);
+            //if ((maxPage % 1) > 0)
+            //{
+            //    if (maxPage % 2 != 0)
+            //    {
+            //        maxPage = maxPage + 1;
+            //    }
+            //}
+
+            //if (pageNumber > maxPage)
+            //{
+            //    pageNumber = maxPage;
+            //}
 
             var viewModel = new PageNumModel
             {
