@@ -1,9 +1,10 @@
 ﻿@model postModel
 
-<div> Post</div>  
+<div> Post</div>
+<div> Auth: @Model.AppUserModel.FirstName</div>
 
 <div class="container">
-    <div class="row d-flex justify-content-center" >
+    <div class="row d-flex justify-content-center">
         <div class="col-md-12">
             <div class="card shadow">
                 <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" class="card-img-top" />
@@ -13,6 +14,35 @@
                 <div class="card-body">
                     @Html.Raw(Model.Body)
                 </div>
+            </div>
+            <div class="">
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        await Html.RenderPartialAsync("_commentView", new CommentViewModel { postId = Model.Id, mainCommentId = 0 });
+                    }
+
+                }
+
+                @foreach (var item in Model.CommentId)
+                {
+                    <h4>Main comment</h4>
+                    <h6>@item.commentMsg----@item.Created</h6>
+
+
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        await Html.RenderPartialAsync("_commentView", new CommentViewModel { postId = Model.Id, mainCommentId = item.Id });
+
+                    }
+
+                    @foreach (var subCmt in item.subCommentId)
+                    {
+                        <h4>Sub comment</h4>
+                        <h7>@subCmt.commentMsg----@subCmt.Created</h7>
+                    }
+
+                }
             </div>
         </div>
     </div>

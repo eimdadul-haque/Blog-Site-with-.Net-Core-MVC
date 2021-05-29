@@ -14,25 +14,45 @@
                 <a asp-controller="Home" asp-action="post" asp-route-id="@post.Id" class="card mt-1 mb-1">
                     <img src="@("~/image/"+post.ImageName)" class="card-img-top" height="300px" width="300px" asp-append-version="true" />
                     <div class="card-body">
-                        @post.categoryModel.category
-                        @post.Title
+                      @post.categoryModel.category
+                      @post.Title
                     </div>
                 </a>
             </div>
         }
     </div>
     <div class="d-flex justify-content-center">
+
+        @{ 
+            List<int> page = new List<int>();
+
+            int midPoint = (int)Model.pageNum;
+
+            if (midPoint < 3)
+            {
+                midPoint = 3;
+            }
+            else if (midPoint > (int)Model.maxPage - 2)
+            {
+                midPoint = (int)Model.maxPage - 2;
+            }
+
+            for (int i = midPoint - 2; i< midPoint + 2; i++)
+            {
+                page.Add(i);
+            }
+        }
+
         @if (Model.pageNum > 1)
         {
             <a asp-controller="Home" asp-action="Index" class="mr-1 btn btn-info" asp-route-pageNumber="@(Model.pageNum-1)">Back</a>
 
         }
-        @for (var i = 1; i <= Model.maxPage; i+=10)
+        @foreach (var i in page)
         {
-            if (i != Model.pageNum)
-            {
-                <a asp-controller="Home" asp-action="Index" class="ml-1 btn btn-info" asp-route-pageNumber="@i">@i</a>
-            }
+            string active = i == Model.pageNum ? "active" : "";
+            <a asp-controller="Home" asp-action="Index" class="ml-1 btn btn-info @active" asp-route-pageNumber="@i">@i</a>
+
         }
 
         @if (Model.pageNum < Model.maxPage)
@@ -43,30 +63,8 @@
     </div>
 </div>
 
-<footer class="bg-dark">
-    <div class="container ">
-        <div class="row text-white">
-            <div class="col-4 d-flex flex-column text-center mt-5">
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-            </div>
-            <div class="col-4 d-flex flex-column text-center mt-5">
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-            </div>
-            <div class="col-4 d-flex flex-column text-center mt-5">
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-                <a>Hello</a>
-            </div>
-        </div>
-    </div>
+<footer>
+    @{
+        await Html.RenderPartialAsync("_Footer");
+    }
 </footer>
-
-
-

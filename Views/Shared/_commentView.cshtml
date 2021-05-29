@@ -1,0 +1,22 @@
+﻿@model CommentViewModel
+
+@{ 
+
+}
+
+<div class="container">
+    <form asp-controller="Comment" asp-action="Create" method="post">
+        <div>
+            <input asp-for="postId" type="hidden" />
+        </div>
+        <div>
+            <input asp-for="mainCommentId" type="hidden" />
+        </div>
+        <div>
+            <input asp-for="commentMsg" />
+        </div>
+
+        <input type="submit" value="Submit" />
+
+    </form>
+</div>

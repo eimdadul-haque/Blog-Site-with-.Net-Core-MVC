@@ -10,6 +10,12 @@ namespace Blog_Site_Core.ViewModels
     public class SignUpModel
     {
         [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LasttName { get; set; }
+
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

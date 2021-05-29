@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog_Site_Core.Migrations
 {
-    public partial class Update : Migration
+    public partial class AddModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "appUserD",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_appUserD", x => x.UserId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -176,17 +189,68 @@ namespace Blog_Site_Core.Migrations
                     ImageName = table.Column<string>(nullable: true),
                     Creacted = table.Column<DateTime>(nullable: false),
                     Tags = table.Column<string>(nullable: true),
+                    AppUserModelId = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_postModelD", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_postModelD_appUserD_AppUserModelId",
+                        column: x => x.AppUserModelId,
+                        principalTable: "appUserD",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_postModelD_categoryModelD_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "categoryModelD",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "mainCommentD",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    commentMsg = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    UsreId = table.Column<string>(nullable: false),
+                    postModelId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_mainCommentD", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_mainCommentD_postModelD_postModelId",
+                        column: x => x.postModelId,
+                        principalTable: "postModelD",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "subCommentD",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    commentMsg = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    UsreId = table.Column<string>(nullable: false),
+                    mainCommentIdId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_subCommentD", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_subCommentD_mainCommentD_mainCommentIdId",
+                        column: x => x.mainCommentIdId,
+                        principalTable: "mainCommentD",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -229,9 +293,24 @@ namespace Blog_Site_Core.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_mainCommentD_postModelId",
+                table: "mainCommentD",
+                column: "postModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_postModelD_AppUserModelId",
+                table: "postModelD",
+                column: "AppUserModelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_postModelD_CategoryId",
                 table: "postModelD",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_subCommentD_mainCommentIdId",
+                table: "subCommentD",
+                column: "mainCommentIdId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -252,13 +331,22 @@ namespace Blog_Site_Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "postModelD");
+                name: "subCommentD");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "mainCommentD");
+
+            migrationBuilder.DropTable(
+                name: "postModelD");
+
+            migrationBuilder.DropTable(
+                name: "appUserD");
 
             migrationBuilder.DropTable(
                 name: "categoryModelD");

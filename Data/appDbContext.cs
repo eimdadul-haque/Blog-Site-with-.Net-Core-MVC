@@ -1,4 +1,5 @@
 ﻿using Blog_Site_Core.Models;
+using Blog_Site_Core.Models.Comments;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,7 +18,11 @@ namespace Blog_Site_Core.Data
         }
         public DbSet<postModel> postModelD { get; set; }
         public DbSet<categoryModel> categoryModelD { get; set; }
+        public DbSet<MainComment>  mainCommentD { get; set; }
+        public DbSet<SubComment> subCommentD { get; set; }
+        public DbSet<AppUserModel> appUserD { get; set; }
     }
 }
 
 
+//

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog_Site_Core.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20210510143401_Update")]
-    partial class Update
+    [Migration("20210526134117_Add Models")]
+    partial class AddModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,78 @@ namespace Blog_Site_Core.Migrations
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Blog_Site_Core.Models.AppUserModel", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("appUserD");
+                });
+
+            modelBuilder.Entity("Blog_Site_Core.Models.Comments.MainComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UsreId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("commentMsg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("postModelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("postModelId");
+
+                    b.ToTable("mainCommentD");
+                });
+
+            modelBuilder.Entity("Blog_Site_Core.Models.Comments.SubComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UsreId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("commentMsg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("mainCommentIdId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("mainCommentIdId");
+
+                    b.ToTable("subCommentD");
+                });
 
             modelBuilder.Entity("Blog_Site_Core.Models.categoryModel", b =>
                 {
@@ -44,11 +116,16 @@ namespace Blog_Site_Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserModelId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Body")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Creacted")
@@ -65,6 +142,8 @@ namespace Blog_Site_Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserModelId");
 
                     b.HasIndex("CategoryId");
 
@@ -267,8 +346,28 @@ namespace Blog_Site_Core.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Blog_Site_Core.Models.Comments.MainComment", b =>
+                {
+                    b.HasOne("Blog_Site_Core.Models.postModel", null)
+                        .WithMany("CommentId")
+                        .HasForeignKey("postModelId");
+                });
+
+            modelBuilder.Entity("Blog_Site_Core.Models.Comments.SubComment", b =>
+                {
+                    b.HasOne("Blog_Site_Core.Models.Comments.MainComment", "mainCommentId")
+                        .WithMany("subCommentId")
+                        .HasForeignKey("mainCommentIdId");
+                });
+
             modelBuilder.Entity("Blog_Site_Core.Models.postModel", b =>
                 {
+                    b.HasOne("Blog_Site_Core.Models.AppUserModel", "AppUserModel")
+                        .WithMany()
+                        .HasForeignKey("AppUserModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Blog_Site_Core.Models.categoryModel", "categoryModel")
                         .WithMany()
                         .HasForeignKey("CategoryId")
