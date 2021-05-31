@@ -44,22 +44,26 @@ namespace Blog_Site_Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("UsreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("commentMsg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("postModelId")
+                    b.Property<int>("postId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("subCommentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("postModelId");
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("postId");
 
                     b.ToTable("mainCommentD");
                 });
@@ -71,22 +75,28 @@ namespace Blog_Site_Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("UsreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("commentMsg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("mainCommentIdId")
+                    b.Property<int>("mainCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("subCommentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("mainCommentIdId");
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("mainCommentId");
+
+                    b.HasIndex("subCommentId");
 
                     b.ToTable("subCommentD");
                 });
@@ -346,16 +356,32 @@ namespace Blog_Site_Core.Migrations
 
             modelBuilder.Entity("Blog_Site_Core.Models.Comments.MainComment", b =>
                 {
-                    b.HasOne("Blog_Site_Core.Models.postModel", null)
+                    b.HasOne("Blog_Site_Core.Models.AppUserModel", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Blog_Site_Core.Models.postModel", "post")
                         .WithMany("CommentId")
-                        .HasForeignKey("postModelId");
+                        .HasForeignKey("postId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Blog_Site_Core.Models.Comments.SubComment", b =>
                 {
-                    b.HasOne("Blog_Site_Core.Models.Comments.MainComment", "mainCommentId")
-                        .WithMany("subCommentId")
-                        .HasForeignKey("mainCommentIdId");
+                    b.HasOne("Blog_Site_Core.Models.AppUserModel", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Blog_Site_Core.Models.Comments.MainComment", "mainComment")
+                        .WithMany()
+                        .HasForeignKey("mainCommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Blog_Site_Core.Models.Comments.MainComment", null)
+                        .WithMany("subComment")
+                        .HasForeignKey("subCommentId");
                 });
 
             modelBuilder.Entity("Blog_Site_Core.Models.postModel", b =>

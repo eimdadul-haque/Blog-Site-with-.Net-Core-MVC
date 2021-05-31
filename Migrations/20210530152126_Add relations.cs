@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog_Site_Core.Migrations
 {
-    public partial class AddModels : Migration
+    public partial class Addrelations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -215,20 +215,27 @@ namespace Blog_Site_Core.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    postId = table.Column<int>(nullable: false),
                     commentMsg = table.Column<string>(nullable: true),
+                    AppUserId = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    UsreId = table.Column<string>(nullable: false),
-                    postModelId = table.Column<int>(nullable: true)
+                    subCommentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_mainCommentD", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_mainCommentD_postModelD_postModelId",
-                        column: x => x.postModelId,
+                        name: "FK_mainCommentD_appUserD_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "appUserD",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_mainCommentD_postModelD_postId",
+                        column: x => x.postId,
                         principalTable: "postModelD",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,16 +245,29 @@ namespace Blog_Site_Core.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     commentMsg = table.Column<string>(nullable: true),
+                    AppUserId = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    UsreId = table.Column<string>(nullable: false),
-                    mainCommentIdId = table.Column<int>(nullable: true)
+                    mainCommentId = table.Column<int>(nullable: false),
+                    subCommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_subCommentD", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_subCommentD_mainCommentD_mainCommentIdId",
-                        column: x => x.mainCommentIdId,
+                        name: "FK_subCommentD_appUserD_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "appUserD",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_subCommentD_mainCommentD_mainCommentId",
+                        column: x => x.mainCommentId,
+                        principalTable: "mainCommentD",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_subCommentD_mainCommentD_subCommentId",
+                        column: x => x.subCommentId,
                         principalTable: "mainCommentD",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -293,9 +313,14 @@ namespace Blog_Site_Core.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_mainCommentD_postModelId",
+                name: "IX_mainCommentD_AppUserId",
                 table: "mainCommentD",
-                column: "postModelId");
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mainCommentD_postId",
+                table: "mainCommentD",
+                column: "postId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_postModelD_AppUserModelId",
@@ -308,9 +333,19 @@ namespace Blog_Site_Core.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_subCommentD_mainCommentIdId",
+                name: "IX_subCommentD_AppUserId",
                 table: "subCommentD",
-                column: "mainCommentIdId");
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_subCommentD_mainCommentId",
+                table: "subCommentD",
+                column: "mainCommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_subCommentD_subCommentId",
+                table: "subCommentD",
+                column: "subCommentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

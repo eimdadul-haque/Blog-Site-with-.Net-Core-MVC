@@ -23,11 +23,12 @@
                     }
 
                 }
-
+                ;;
                 @foreach (var item in Model.CommentId)
                 {
                     <h4>Main comment</h4>
                     <h6>@item.commentMsg----@item.Created</h6>
+                    <p>@item.AppUser.FirstName</p>
 
 
                     if (User.Identity.IsAuthenticated)
@@ -36,7 +37,7 @@
 
                     }
 
-                    @foreach (var subCmt in item.subCommentId)
+                    @foreach (var subCmt in item.subComment)
                     {
                         <h4>Sub comment</h4>
                         <h7>@subCmt.commentMsg----@subCmt.Created</h7>

@@ -1,9 +1,11 @@
 ﻿using Blog_Site_Core.Data;
 using Blog_Site_Core.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog_Site_Core.Controllers
 {
@@ -11,10 +13,15 @@ namespace Blog_Site_Core.Controllers
     public class HomeController : Controller
     {
         private readonly appDbContext _db;
-        public HomeController(appDbContext db)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public HomeController(appDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
+
         }
+            
 
         //Get all post
         public IActionResult Index(double pageNumber)
@@ -60,7 +67,7 @@ namespace Blog_Site_Core.Controllers
             var post = _db.postModelD
                 .Include(c => c.AppUserModel)
                 .Include(c => c.CommentId)
-                .ThenInclude(c => c.subCommentId)
+                .ThenInclude(c => c.subComment)
                 .FirstOrDefault(c => c.Id == id);
 
 
@@ -68,9 +75,40 @@ namespace Blog_Site_Core.Controllers
         }
 
         //Comment 
-        public IActionResult Comment()
+        [HttpGet]
+        public async Task<IActionResult> Comment()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(CommentViewModel commentViewModel)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+
+
+            commentViewModel.UserId = userId;
+
+            if (commentViewModel.mainCommentId > 0)
+            {
+
+            }
+            else
+            {
+                _db.mainCommentD.Add(new Models.Comments.MainComment
+                {
+                    Id = commentViewModel.mainCommentId,
+                    commentMsg = commentViewModel.commentMsg,
+                    AppUserId = userId,
+                    postId = commentViewModel.postId
+
+                }) ;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("post",new { id = commentViewModel.postId });
         }
 
     }

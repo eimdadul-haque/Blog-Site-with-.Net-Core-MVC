@@ -13,6 +13,9 @@ namespace Blog_Site_Core.ViewModels
         public int postId { get; set; }
 
         [Required]
+        public string UserId { get; set; }
+
+        [Required]
         public int mainCommentId { get; set; }
 
         [Required]
