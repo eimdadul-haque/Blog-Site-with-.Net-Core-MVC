@@ -361,7 +361,7 @@ namespace Blog_Site_Core.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Blog_Site_Core.Models.postModel", "post")
-                        .WithMany("CommentId")
+                        .WithMany("Comment")
                         .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -62,14 +62,13 @@ namespace Blog_Site_Core.Controllers
         }
 
         //Get Single post
-        public IActionResult post(int id) 
+        public async Task<IActionResult> post(int id) 
         {
-            var post = _db.postModelD
-                .Include(c => c.AppUserModel)
-                .Include(c => c.CommentId)
-                .ThenInclude(c => c.subComment)
-                .FirstOrDefault(c => c.Id == id);
 
+            var post = _db.postModelD.Include(c => c.AppUserModel).FirstOrDefault(c => c.Id == id);
+            var MainComment = await _db.mainCommentD.Where(c => c.postId == post.Id).Include(c => c.AppUser).Include(c=>c.subComment).ToListAsync();
+
+            post.Comment = MainComment;
 
             return View(post);
         }
@@ -108,7 +107,7 @@ namespace Blog_Site_Core.Controllers
                 await _db.SaveChangesAsync();
             }
 
-            return RedirectToAction("post",new { id = commentViewModel.postId });
+            return RedirectToAction("post",new { id = commentViewModel.postId});
         }
 
     }

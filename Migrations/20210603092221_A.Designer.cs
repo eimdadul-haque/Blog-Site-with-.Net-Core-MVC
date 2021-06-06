@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog_Site_Core.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20210530152126_Add relations")]
-    partial class Addrelations
+    [Migration("20210603092221_A")]
+    partial class A
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -363,7 +363,7 @@ namespace Blog_Site_Core.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Blog_Site_Core.Models.postModel", "post")
-                        .WithMany("CommentId")
+                        .WithMany("Comment")
                         .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -34,7 +34,7 @@ namespace Blog_Site_Core.Models
         [ForeignKey("CategoryId")]
         public categoryModel categoryModel { get; set; }
 
-        public List<MainComment> CommentId { get; set; }
+        public List<MainComment> Comment { get; set; }
 
         [NotMapped]
         [DisplayName("Upload File")]

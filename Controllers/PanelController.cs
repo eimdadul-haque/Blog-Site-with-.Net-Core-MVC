@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Blog_Site_Core.Controllers
 {
 
-    [Authorize(Roles ="Admin")]
+    [Authorize]
     public class PanelController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;

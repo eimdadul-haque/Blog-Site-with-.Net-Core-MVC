@@ -17,14 +17,14 @@
             </div>
             <div class="">
                 @{
-                    if (User.Identity.IsAuthenticated)
+                    ;    if (User.Identity.IsAuthenticated)
                     {
                         await Html.RenderPartialAsync("_commentView", new CommentViewModel { postId = Model.Id, mainCommentId = 0 });
                     }
 
                 }
-                ;;
-                @foreach (var item in Model.CommentId)
+                
+                @foreach (var item in Model.Comment)
                 {
                     <h4>Main comment</h4>
                     <h6>@item.commentMsg----@item.Created</h6>
@@ -37,11 +37,11 @@
 
                     }
 
-                    @foreach (var subCmt in item.subComment)
+                    @*@foreach (var subCmt in item.subComment)
                     {
                         <h4>Sub comment</h4>
                         <h7>@subCmt.commentMsg----@subCmt.Created</h7>
-                    }
+                    }*@
 
                 }
             </div>

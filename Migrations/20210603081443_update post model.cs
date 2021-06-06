@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog_Site_Core.Migrations
 {
-    public partial class Addrelations : Migration
+    public partial class updatepostmodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -190,7 +190,8 @@ namespace Blog_Site_Core.Migrations
                     Creacted = table.Column<DateTime>(nullable: false),
                     Tags = table.Column<string>(nullable: true),
                     AppUserModelId = table.Column<string>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
+                    CommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,7 +220,8 @@ namespace Blog_Site_Core.Migrations
                     commentMsg = table.Column<string>(nullable: true),
                     AppUserId = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    subCommentId = table.Column<int>(nullable: false)
+                    subCommentId = table.Column<int>(nullable: false),
+                    CommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -229,6 +231,12 @@ namespace Blog_Site_Core.Migrations
                         column: x => x.AppUserId,
                         principalTable: "appUserD",
                         principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_mainCommentD_postModelD_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "postModelD",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_mainCommentD_postModelD_postId",
@@ -316,6 +324,11 @@ namespace Blog_Site_Core.Migrations
                 name: "IX_mainCommentD_AppUserId",
                 table: "mainCommentD",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mainCommentD_CommentId",
+                table: "mainCommentD",
+                column: "CommentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_mainCommentD_postId",

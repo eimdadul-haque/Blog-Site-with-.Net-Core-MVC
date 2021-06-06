@@ -34,18 +34,17 @@ namespace Blog_Site_Core.Controllers
 
         // POST: CategoryController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(categoryModel category)
+        public async Task<IActionResult> Create(categoryModel value)
         {
             if (ModelState.IsValid)
             {
-                _db.categoryModelD.Add(category);
+                _db.categoryModelD.Add(value);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
 
             }
 
-            return View(category);
+            return View(value);
         }
 
     }
