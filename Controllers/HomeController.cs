@@ -67,18 +67,18 @@ namespace Blog_Site_Core.Controllers
 
             var post = _db.postModelD.Include(c => c.AppUserModel).FirstOrDefault(c => c.Id == id);
             var MainComment = await _db.mainCommentD.Where(c => c.postId == post.Id).Include(c => c.AppUser).Include(c=>c.subComment).ToListAsync();
-
+   
             post.Comment = MainComment;
 
             return View(post);
         }
 
         //Comment 
-        [HttpGet]
-        public async Task<IActionResult> Comment()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Comment()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel commentViewModel)
@@ -91,11 +91,17 @@ namespace Blog_Site_Core.Controllers
 
             if (commentViewModel.mainCommentId > 0)
             {
-
+                await _db.subCommentD.AddAsync(new Models.Comments.SubComment { 
+                    mainCommentId = commentViewModel.mainCommentId,
+                    commentMsg = commentViewModel.commentMsg,
+                    AppUserId = commentViewModel.UserId,
+                   
+                });
+                await _db.SaveChangesAsync();
             }
             else
             {
-                _db.mainCommentD.Add(new Models.Comments.MainComment
+                await _db.mainCommentD.AddAsync(new Models.Comments.MainComment
                 {
                     Id = commentViewModel.mainCommentId,
                     commentMsg = commentViewModel.commentMsg,

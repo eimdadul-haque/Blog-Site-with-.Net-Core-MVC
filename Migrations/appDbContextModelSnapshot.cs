@@ -56,9 +56,6 @@ namespace Blog_Site_Core.Migrations
                     b.Property<int>("postId")
                         .HasColumnType("int");
 
-                    b.Property<int>("subCommentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
@@ -87,16 +84,11 @@ namespace Blog_Site_Core.Migrations
                     b.Property<int>("mainCommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("subCommentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("mainCommentId");
-
-                    b.HasIndex("subCommentId");
 
                     b.ToTable("subCommentD");
                 });
@@ -374,14 +366,10 @@ namespace Blog_Site_Core.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Blog_Site_Core.Models.Comments.MainComment", "mainComment")
-                        .WithMany()
+                        .WithMany("subComment")
                         .HasForeignKey("mainCommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Blog_Site_Core.Models.Comments.MainComment", null)
-                        .WithMany("subComment")
-                        .HasForeignKey("subCommentId");
                 });
 
             modelBuilder.Entity("Blog_Site_Core.Models.postModel", b =>

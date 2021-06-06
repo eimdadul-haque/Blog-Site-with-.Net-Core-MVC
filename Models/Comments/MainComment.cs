@@ -20,8 +20,6 @@ namespace Blog_Site_Core.Models.Comments
 
         public DateTime Created { get; set; } = DateTime.Now;
 
-        public int subCommentId { get; set; }
-        [ForeignKey("subCommentId")]
         public List<SubComment> subComment { get; set; }
     }
 }
