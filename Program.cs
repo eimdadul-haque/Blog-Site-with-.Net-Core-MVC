@@ -1,4 +1,6 @@
+using Blog_Site_Core.Controllers;
 using Blog_Site_Core.Data;
+using Blog_Site_Core.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ namespace Blog_Site_Core
 {
     public class Program
     {
+        
+
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -44,7 +48,7 @@ namespace Blog_Site_Core
 
                 if (!ctx.Users.Any(u => u.UserName == "admin"))
                 {
-                    var adminUser = new IdentityUser
+                     var adminUser = new IdentityUser
                     {
 
                         UserName = "admin",
@@ -54,6 +58,10 @@ namespace Blog_Site_Core
 
                     var result = userMng.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
                     userMng.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
+
+                    //var user = new AuthController();
+                    //user.appUser(adminUser.Id);
+
                 }
             }
             catch (Exception e)

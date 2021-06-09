@@ -83,15 +83,16 @@ namespace Blog_Site_Core.Controllers
 
                 if(result.Succeeded){
                     
-                    var userModel = new AppUserModel
-                    {
-                        UserId = user.Id,
-                        FirstName = signUpModel.FirstName,
-                        LastName = signUpModel.LasttName
-                    };
+                    //var userModel = new AppUserModel
+                    //{
+                    //    UserId = user.Id,
+                    //    FirstName = signUpModel.FirstName,
+                    //    LastName = signUpModel.LasttName
+                    //};
 
-                    _db.appUserD.Add(userModel);
-                    await _db.SaveChangesAsync();
+                    //_db.appUserD.Add(userModel);
+                    //await _db.SaveChangesAsync();
+                   await appUser(user.Id, signUpModel.FirstName, signUpModel.LasttName, _db);
 
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
@@ -99,6 +100,37 @@ namespace Blog_Site_Core.Controllers
             }
 
             return View(signUpModel);
+        }
+
+
+        public static async Task appUser(string id, string firstName , string lastName, appDbContext _db)
+        {
+            if (firstName != null && lastName != null)
+            {
+                var userModel = new AppUserModel
+                {
+                    UserId = id,
+                    FirstName = firstName,
+                    LastName = lastName
+                };
+
+                 await _db.appUserD.AddAsync(userModel);
+                 await _db.SaveChangesAsync();
+            }
+            else if (firstName == null && lastName == null)
+            {
+                var userModel = new AppUserModel
+                {
+                    UserId = id,
+                    FirstName = "Admin",
+                    LastName = "admin"
+                };
+
+                await _db.appUserD.AddAsync(userModel);
+                await _db.SaveChangesAsync();
+            }
+
+
         }
 
 

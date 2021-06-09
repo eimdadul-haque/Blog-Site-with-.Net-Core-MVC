@@ -66,8 +66,7 @@ namespace Blog_Site_Core.Controllers
         {
 
             var post = _db.postModelD.Include(c => c.AppUserModel).FirstOrDefault(c => c.Id == id);
-            var MainComment = await _db.mainCommentD.Where(c => c.postId == post.Id).Include(c => c.AppUser).Include(c=>c.subComment).ToListAsync();
-   
+            var MainComment = await _db.mainCommentD.Where(c => c.postId == post.Id).Include(c => c.AppUser).Include(c=>c.subComment).ThenInclude(c=>c.AppUser).ToListAsync();
             post.Comment = MainComment;
 
             return View(post);
