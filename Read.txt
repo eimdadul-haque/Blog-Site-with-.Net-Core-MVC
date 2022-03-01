@@ -1,4 +1,0 @@
-﻿Admin
-
-User Name : admid
-Password: password

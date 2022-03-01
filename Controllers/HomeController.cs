@@ -1,119 +1,32 @@
-﻿using Blog_Site_Core.Data;
-using Blog_Site_Core.ViewModels;
-using Microsoft.AspNetCore.Identity;
+﻿using BlogSite.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
-namespace Blog_Site_Core.Controllers
+namespace BlogSite.Controllers
 {
-  
     public class HomeController : Controller
     {
-        private readonly appDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(appDbContext db, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _db = db;
-            _userManager = userManager;
-
-        }
-            
-
-        //Get all post
-        public IActionResult Index(double pageNumber)
-        {
-            if(pageNumber < 1)
-            {
-                return RedirectToAction("Index", new { pageNumber = 1 });
-            }
-
-            double pageSize = 6;
-            double totalPost = _db.postModelD.Count();
-            double tempMaxPage = (double)(totalPost / pageSize);
-            double maxPage = Math.Floor(tempMaxPage);
-
-            if ((tempMaxPage % 1) > 0 || maxPage == 0)
-            {
-               maxPage = maxPage + 1;
-            }
-
-            if (pageNumber > maxPage)
-            {
-                pageNumber = maxPage;
-            }
-
- 
-                var viewModel = new PageNumModel
-                {
-                    maxPage = maxPage,
-                    pageNum = pageNumber,
-                    post = _db.postModelD.Include(c => c.categoryModel) 
-                 .Skip((int)(pageSize * (pageNumber - 1)))
-                 .Take((int)pageSize)
-                 .ToList()
-                };
-
-                return View(viewModel);
-
+            _logger = logger;
         }
 
-        //Get Single post
-        public async Task<IActionResult> post(int id) 
+        public IActionResult Index()
         {
-
-            var post = _db.postModelD.Include(c => c.AppUserModel).FirstOrDefault(c => c.Id == id);
-            var MainComment = await _db.mainCommentD.Where(c => c.postId == post.Id).Include(c => c.AppUser).Include(c=>c.subComment).ThenInclude(c=>c.AppUser).ToListAsync();
-            post.Comment = MainComment;
-
-            return View(post);
+            return View();
         }
 
-        //Comment 
-        //[HttpGet]
-        //public async Task<IActionResult> Comment()
-        //{
-        //    return View();
-        //}
-
-        [HttpPost]
-        public async Task<IActionResult> Comment(CommentViewModel commentViewModel)
+        public IActionResult Privacy()
         {
-            var userId = _userManager.GetUserId(HttpContext.User);
-
-
-
-            commentViewModel.UserId = userId;
-
-            if (commentViewModel.mainCommentId > 0)
-            {
-                await _db.subCommentD.AddAsync(new Models.Comments.SubComment { 
-                    mainCommentId = commentViewModel.mainCommentId,
-                    commentMsg = commentViewModel.commentMsg,
-                    AppUserId = commentViewModel.UserId,
-                   
-                });
-                await _db.SaveChangesAsync();
-            }
-            else
-            {
-                await _db.mainCommentD.AddAsync(new Models.Comments.MainComment
-                {
-                    Id = commentViewModel.mainCommentId,
-                    commentMsg = commentViewModel.commentMsg,
-                    AppUserId = userId,
-                    postId = commentViewModel.postId
-
-                }) ;
-
-                await _db.SaveChangesAsync();
-            }
-
-            return RedirectToAction("post",new { id = commentViewModel.postId});
+            return View();
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
