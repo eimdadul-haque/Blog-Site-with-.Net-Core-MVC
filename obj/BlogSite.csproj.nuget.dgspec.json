@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\BlogSite.csproj": {}
+    "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\BlogSite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\BlogSite.csproj": {
+    "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\BlogSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\BlogSite.csproj",
+        "projectUniqueName": "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\BlogSite.csproj",
         "projectName": "BlogSite",
-        "projectPath": "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\BlogSite.csproj",
+        "projectPath": "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\BlogSite.csproj",
         "packagesPath": "C:\\Users\\EIMDADUL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\obj\\",
+        "outputPath": "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\EIMDADUL\\AppData\\Roaming\\NuGet\\NuGet.Config",

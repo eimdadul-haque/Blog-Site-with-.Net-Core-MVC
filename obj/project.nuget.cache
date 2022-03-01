@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "754wRPoVucUwA79AndhgKDgcaEeUdz3dON4cNGOnlZNLz1rTSBG7kAr8dWyoNZnl/udpxUF79OjtyvvHAiYMkg==",
+  "dgSpecHash": "YmjXtEwmDVmJwlY90fc92ems4kS3E3QrqlnYCY0hKanLgw3wr+TBEvknN0t7MazH3f5xfg3OvWjyqstufFurOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\EIMDADUL\\Desktop\\BlogSite\\BlogSite.csproj",
+  "projectFilePath": "C:\\Users\\EIMDADUL\\Desktop\\Blog-Site-with-.Net-Core-MVC\\BlogSite.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
