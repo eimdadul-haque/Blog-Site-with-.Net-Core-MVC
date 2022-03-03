@@ -1,9 +1,3 @@
-body {
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-
 /*Home*/
 .home-page {
   width: 100%;
@@ -36,12 +30,12 @@ body {
   justify-content: center;
 }
 
-.col-lg-8 {
+.col-8 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
-.col-lg-4 {
+.col-4 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,17 +101,117 @@ body {
   color: white;
 }
 
-/*Not Found*/
+/*Blog page*/
 
-.notfound-container {
-  height: 80vh;
-  max-width: 100vw;
+.blog-img {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  object-fit: cover;
+  height: 50vh;
+  border-radius: 5px;
+}
+
+.blog-title-container {
+  margin-top: 7px;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+}
+
+.desc-text {
+  font-size: 21px;
+  text-align: justify;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.blog-edit-delete-btn-container button {
+  border: none;
+  background-color: transparent;
+}
+
+.blog-edit-delete-btn-container .edit {
+  color: #00aced;
+}
+
+.blog-edit-delete-btn-container .remove {
+  color: red;
+}
+
+/*Add Blog*/
+
+.add-blo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.add-blog-img-container {
+  width: 400px;
+  height: 40vh;
+}
+
+.add-input-custom {
+  width: 100%;
+}
+
+.add-input-custom div input {
+  margin-top: 7px;
+}
+
+.add-input-custom div textarea {
+  margin-top: 7px;
+  min-height: 40vh;
+}
+
+.add-input-custom div textarea:focus {
+  outline: none;
+}
+
+.add-input-custom div input:focus {
+  outline: none;
+}
+.add-textarea {
+  width: 100%;
+}
+.add-textarea textarea {
+  width: 100%;
+}
+
+/*Login*/
+
+.login-container {
+  background-image: url(../images/reg.jpg);
+  margin: 0px;
+  padding: 0px;
+  height: 90vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+.card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+.login-form {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.notfound-container h1 {
-  color: red;
-  font-family: "Times New Roman", Times, serif;
+form div {
+  width: 100%;
+  background: transparent;
+}
+
+form div input {
+  margin-top: 5px;
+  width: 100%;
+  background: transparent;
 }
