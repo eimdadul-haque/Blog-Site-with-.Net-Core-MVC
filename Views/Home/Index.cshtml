@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<BlogModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,22 +8,27 @@
     <h4>BLOG</h4>
     <img class="home-img" src="~/images/home.jpg" asp-append-version="true" />
 </div>
+
 <div class="blog-container">
     <div class="row mt-3">
         <div class="col-lg-8 col-md-10 col-sm-12">
             @{
-                for (int i = 1; i <= 4; i++)
+                foreach (var item in Model)
                 {
-                    <div class="card" style="width: 25rem;">
-                        <img class="card-img-top" src="~/images/home.jpg" />
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the
-                                card's content.
-                            </p>
+                    int i = 0;
+                    if (i <= 6)
+                    {
+                        <div onclick="getBlog(@item.Id)" class="card" style="width: 25rem;">
+                            <img class="card-img-top" src="~/images/home.jpg" />
+                            <div class="card-body">
+                                <h5 class="card-title">@item.blogTitlt</h5>
+                                <p class="card-text">
+                                    @item.blogBody
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    i++;
                 }
             }
 

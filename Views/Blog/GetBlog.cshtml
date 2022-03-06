@@ -1,24 +1,23 @@
+@model BlogModel
+
 <div class="blog-container">
     <div class="row mt-3">
         <div class="col-lg-8 col-md-10 col-sm-12">
             <img class="blog-img" src="~/images/home.jpg" alt="photo">
             <div class="blog-title-container">
                 <p><span style="color: #5D7D7D;">Author:</span> Eimdadul</p>
-                <h4>Lorem ipsum dolor sit amet.</h4>
+                <h4>@Model.blogTitlt</h4>
                 <div class="blog-edit-delete-btn-container">
-                    <button class="edit">
+                    <a asp-action="Blog" class="edit">
                         <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="remove">
+                    </a>
+                    <a asp-action="BlogDelete" asp-route-id="@Model.Id" asp-controller="Blog" class="remove">
                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="desc-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, vero nostrum facilis laboriosam accusamus
-                amet eum reiciendis odit nobis maxime ipsum distinctio beatae aperiam, velit itaque assumenda autem,
-                dignissimos minus natus. Error commodi molestiae, ipsam animi soluta sunt necessitatibus odio ad, vero
-                incidunt consequatur, voluptate illo quisquam nulla aliquid tempora.
+                @Model.blogBody
             </div>
 
         </div>
