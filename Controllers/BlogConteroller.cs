@@ -2,13 +2,16 @@ using BlogSite.Data;
 using BlogSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BlogSite.Services;
 
 public class BlogController : Controller
 {
     private readonly ApplicationDbContext _context;
-    public BlogController(ApplicationDbContext context)
+    private readonly IWebHostEnvironment _env;
+    public BlogController(ApplicationDbContext context, IWebHostEnvironment env)
     {
         _context = context;
+        _env = env;
     }
 
     [HttpGet]
@@ -20,23 +23,51 @@ public class BlogController : Controller
     [HttpGet]
     public async Task<IActionResult> GetBlog(int id)
     {
-        return View(await _context.blogModelD.FindAsync(id));
+        return View(await _context.blogModelD.Include(x=>x.comment).FirstOrDefaultAsync(x=>x.Id == id));
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddBlog()
+    public async Task<IActionResult> Post_Edit_Blog(int? id)
     {
-        return View();
+        if (id > 0)
+        {
+            return View(await _context.blogModelD.FindAsync(id));
+        }
+        else
+        {
+            return View();
+        }
     }
 
     [HttpPost]
-    [ActionName("AddBlog")]
-    public async Task<IActionResult> PostBlog(BlogModel blog)
+    public async Task<IActionResult> Post_Edit_Blog(BlogModel blog)
     {
         if (ModelState.IsValid)
         {
-            await _context.blogModelD.AddAsync(blog);
-            await _context.SaveChangesAsync();
+            if (blog.blogBody.Length < 200)
+            {
+                return View(blog);
+            }
+
+            if (blog.Id > 0)
+            {
+                blog.userName = User.Identity.Name;
+                ImageUploader obj = new ImageUploader();
+                blog.imageName = await obj.imageUpload(blog, _env);
+                _context.blogModelD.Update(blog);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GetBlog", new { id = blog.Id });
+            }
+            else
+            {
+                blog.userName = User.Identity.Name;
+                ImageUploader obj = new ImageUploader();
+                blog.imageName = await obj.imageUpload(blog, _env);
+                await _context.blogModelD.AddAsync(blog);
+                await _context.SaveChangesAsync();
+                _context.Entry(blog).GetDatabaseValues();
+                return RedirectToAction("GetBlog", new { id = blog.Id });
+            }
         }
         return RedirectToAction(nameof(GetAllBlog));
     }
@@ -47,8 +78,11 @@ public class BlogController : Controller
         var item = await _context.blogModelD.FindAsync(id);
         if (item != null)
         {
-            _context.blogModelD.Remove(item);
-           await _context.SaveChangesAsync();
+            if (User.Identity.Name == item.userName)
+            {
+                _context.blogModelD.Remove(item);
+                await _context.SaveChangesAsync();
+            }
         }
         return RedirectToAction(nameof(GetAllBlog));
     }
@@ -71,5 +105,12 @@ public class BlogController : Controller
 
         return View("Views/Shared/Notfount.cshtml");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> MyBlog()
+    {
+        return View(await _context.blogModelD.Where(x => x.userName == User.Identity.Name).ToListAsync());
+    }
+
 
 }

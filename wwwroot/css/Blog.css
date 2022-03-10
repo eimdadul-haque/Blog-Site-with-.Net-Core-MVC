@@ -1,0 +1,28 @@
+
+.cmt-tiltle {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  background-color: #f3f3f3;
+  padding-left: 5px;
+}
+
+.cmt-submit {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.coment-list{
+  margin-top: 5px;
+  padding: 5px 0 5px 5px;
+  width: 100%;
+}
+
+.cmt-submit button {
+  margin-top: 5px;
+  width: 40%;
+}

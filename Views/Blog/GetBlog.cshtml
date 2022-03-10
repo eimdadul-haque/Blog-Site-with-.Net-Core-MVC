@@ -2,24 +2,65 @@
 
 <div class="blog-container">
     <div class="row mt-3">
-        <div class="col-lg-8 col-md-10 col-sm-12">
-            <img class="blog-img" src="~/images/home.jpg" alt="photo">
+        <div class="col-lg-8 col-md-10 col-sm-12 ">
+            @{
+                try
+                {
+                    if (Model.imageName == "")
+                    {
+                        <img class="blog-img" src="~/images/default.jpg">
+                    }
+                    else
+                    {
+                        <img class="blog-img" src="~/images/@Model.imageName" alt="photo">
+                    }
+                }
+                catch (System.Exception e)
+                {
+
+                    <img class="blog-img" src="~/images/default.jpg">
+                }
+            }
             <div class="blog-title-container">
-                <p><span style="color: #5D7D7D;">Author:</span> Eimdadul</p>
+                <p><span style="color: #5D7D7D;">Author:</span> @Model.userName</p>
                 <h4>@Model.blogTitlt</h4>
-                <div class="blog-edit-delete-btn-container">
-                    <a asp-action="Blog" class="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a asp-action="BlogDelete" asp-route-id="@Model.Id" asp-controller="Blog" class="remove">
-                       <i class="fa-solid fa-trash"></i>
-                    </a>
-                </div>
+
+                @{
+
+                    if (User.Identity.Name == Model.userName)
+                    {
+                        <div class="blog-edit-delete-btn-container">
+                            <a asp-action="Post_Edit_Blog" asp-controller="Blog" class="edit" asp-route-id="@Model.Id">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a asp-action="BlogDelete" asp-route-id="@Model.Id" asp-controller="Blog" class="remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
+                    }
+                }
             </div>
             <div class="desc-text">
                 @Model.blogBody
             </div>
-
+            <div class="cmt-tiltle">
+                <h4>Comment</h4>
+            </div>
+            @* @{
+                foreach (var item in Model.comment)
+                {
+                <div class="coment-list border">
+                <span><b>@item.userName:</b> </span>@item.cmtBody
+                </div>
+                }
+                } *@
+            <div class="coment-list border">
+                <span><b>Eimdadul:</b> </span>Lorem ipsum dolor sit amet.
+            </div>
+            <div class="cmt-submit">
+                <textarea id="cmt-text" class="form-control"></textarea>
+                <button class="btn btn-outline-info" onclick="Comment()">Submit</button>
+            </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="about-title">
@@ -27,7 +68,7 @@
             </div>
             <div class="d-flex justify-content-center aligen-item-center">
                 <div class="card" style="width: 18rem;">
-                     <img class="card-img-top" src="~/images/home.jpg" alt="photo">
+                    <img class="card-img-top" src="~/images/home.jpg" alt="photo">
                     <div class="card-body">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut amet eaque laborum voluptatum sunt
                         omnis.

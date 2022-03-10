@@ -6,3 +6,15 @@
 function getBlog(id) {
     window.location.href = '/Blog/GetBlog/' + id;
 }
+
+function logout(event) {
+    if (event.target.value == "logout") {
+        window.location.href = `/Account/Logout`;
+    }
+ //   
+}
+
+function Comment(){
+    var cmt = document.getElementById("cmt-text").value;
+    
+}

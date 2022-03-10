@@ -16,14 +16,18 @@
                 foreach (var item in Model)
                 {
                     int i = 0;
+                    if (item.imageName == "")
+                    {
+                        item.imageName = "dafault.jpg";
+                    }
                     if (i <= 6)
                     {
                         <div onclick="getBlog(@item.Id)" class="card" style="width: 25rem;">
-                            <img class="card-img-top" src="~/images/home.jpg" />
+                            <img class="card-img-top" src="~/images/@item.imageName" />
                             <div class="card-body">
                                 <h5 class="card-title">@item.blogTitlt</h5>
-                                <p class="card-text">
-                                    @item.blogBody
+                                <p class="card-text" style="text-align:justify">
+                                    @item.blogBody.Substring(0,20)
                                 </p>
                             </div>
                         </div>

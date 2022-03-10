@@ -121,3 +121,27 @@ body {
   color: red;
   font-family: "Times New Roman", Times, serif;
 }
+
+/*profile*/
+
+.sm-pro-img{
+  height: 50px;
+  width: 50px;
+  background-color: black;
+}
+
+.sm-pro-img img{
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.pro-select{
+  width: 20px;
+  border: none;
+  background-color: transparent;
+}
+.pro-select:focus{
+outline: none;
+}
+

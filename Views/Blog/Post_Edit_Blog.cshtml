@@ -4,11 +4,11 @@
     <div class="row mt-3">
         <div class="col-lg-8 col-md-10 col-sm-12">
             <div class="add-blog-img-container">
-                <img id="img-viewer" class="add-blo-img" />
+                <img id="img-viewer" src="" class="add-blo-img" />
             </div>
-            <form class="add-input-custom" method="post" asp-controller="Blog" asp-action="AddBlog">
+            <form class="add-input-custom" method="post" enctype="multipart/form-data" asp-controller="Blog" asp-action="Post_Edit_Blog">
                 <div class="">
-                    <input id="imgFile" accept="image/*" onchange="preview(event)" type="file" />
+                    <input asp-for="imageFile" id="imgFile" accept="image/*" onchange="preview(event)" type="file" />
                 </div>
 
                 <div class="form-group">
@@ -16,11 +16,11 @@
                 </div>
 
                 <div class=" form-group add-textarea">
-                    <textarea class="form-control" asp-for="blogBody" placeholder="Write your story..."></textarea>
+                    <textarea id="txt" data-val-min="200" class="form-control" asp-for="blogBody" placeholder="Write your story..."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <input class="btn btn-success form-control" type="submit" />
+                    <input onclick="txtlen()" class="btn btn-success form-control" type="submit" />
                 </div>
             </form>
         </div>
@@ -79,6 +79,12 @@
             var previewObj = document.getElementById("img-viewer");
             previewObj.src = src;
          }
+        }
+
+        function txtlen(){
+            if(document.getElementById("txt").value.length < 20){
+                alert("Character is less than 20")
+            }
         }
 </script>
 }

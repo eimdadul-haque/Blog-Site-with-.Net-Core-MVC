@@ -1,20 +1,28 @@
+@model SignUpModel
+
 <div class="login-container">
-    <div class="card shadow" style="width: 20rem; height:16rem;">
-        <form class="login-form">
+    <div class="card shadow reg" style="width: 20rem;">
+        <form class="login-form" method="post" asp-controller="Account" asp-action="Registration">
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Name" />
+                <input asp-for="firstName" class="form-control" type="text" placeholder="First Name" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Email" />
+                <input asp-for="lastName" class="form-control" type="text" placeholder="Last Name" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Password" />
+                <input asp-for="userName" class="form-control" type="text" placeholder="User Name" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Confirm password" />
+                <input asp-for="email" class="form-control" type="text" placeholder="Email" />
             </div>
             <div class="form-group">
-                <input class="btn btn-outline-warning form-control" type="submit" value="SUBMIT"/>
+                <input asp-for="password" class="form-control" type="password" placeholder="Password" />
+            </div>
+            <div class="form-group">
+                <input asp-for="confirmPassword" class="form-control" type="password" placeholder="Confirm password" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-outline-warning form-control" type="submit" value="SUBMIT" />
             </div>
         </form>
     </div>

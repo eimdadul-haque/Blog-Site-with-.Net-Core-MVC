@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using BlogSite.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace BlogSite.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<UserModel>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -10,5 +12,6 @@ namespace BlogSite.Data
         }
 
         public DbSet<BlogModel> blogModelD { get; set; }
+        public DbSet<CommentModel> commentD { get; set; }
     }
 }
