@@ -1,0 +1,11 @@
+@model List<CommentModel>
+
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="comment-list border">
+            <span><b>@item.userName:</b> </span>@item.cmtBody
+        </div>
+    }
+}

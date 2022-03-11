@@ -11,10 +11,25 @@ function logout(event) {
     if (event.target.value == "logout") {
         window.location.href = `/Account/Logout`;
     }
- //   
+    //   
 }
 
-function Comment(){
-    var cmt = document.getElementById("cmt-text").value;
-    
+function Comment(userName, blogId) {
+    $(document).ready(function () {
+        const cmtBody = document.getElementById("cmt-input").value;
+        $.ajax({
+            type: "POST",
+            url: "/Comment/addComment/",
+            data: {
+                cmtBody: cmtBody,
+                userName: userName,
+                blogModelId: blogId
+            },
+            success: function (res) {
+                document.getElementById("cmtBox").innerHTML = res;
+                document.getElementById("cmt-input").value = "";
+            }
+        });
+    })
+
 }

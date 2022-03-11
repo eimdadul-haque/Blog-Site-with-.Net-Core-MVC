@@ -46,21 +46,24 @@
             <div class="cmt-tiltle">
                 <h4>Comment</h4>
             </div>
-            @* @{
-                foreach (var item in Model.comment)
-                {
-                <div class="coment-list border">
-                <span><b>@item.userName:</b> </span>@item.cmtBody
-                </div>
+            <div id="cmtBox">
+                @{
+                    foreach (var item in Model.comment)
+                    {
+                        <span class="comment-list border"><b>@item.userName: </b>@item.cmtBody</span>
+                    }
                 }
-                } *@
-            <div class="coment-list border">
-                <span><b>Eimdadul:</b> </span>Lorem ipsum dolor sit amet.
             </div>
-            <div class="cmt-submit">
-                <textarea id="cmt-text" class="form-control"></textarea>
-                <button class="btn btn-outline-info" onclick="Comment()">Submit</button>
-            </div>
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <div class="cmt-submit">
+                        <textarea id="cmt-input" class="form-control"></textarea>
+                        <button class="btn btn-outline-info"
+                        onclick="Comment('@User.Identity.Name','@Model.Id')">Submit</button>
+                    </div>
+                }
+            }
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="about-title">

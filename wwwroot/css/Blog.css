@@ -16,13 +16,19 @@
   align-items: center;
   width: 100%;
 }
-.coment-list{
+.comment-list{
   margin-top: 5px;
   padding: 5px 0 5px 5px;
   width: 100%;
+  display: block;
 }
+
 
 .cmt-submit button {
   margin-top: 5px;
   width: 40%;
+}
+
+#cmtBox{
+  width: 100%;
 }

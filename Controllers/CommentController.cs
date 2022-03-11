@@ -2,35 +2,41 @@ using BlogSite.Data;
 using BlogSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BlogSite.Controllers
 {
-    public class CommentController : ControllerBase
+    public class CommentController : Controller
     {
         private ApplicationDbContext _db;
-        public CommentController(ApplicationDbContext db)
+        private UserManager<UserModel> _user;
+        public CommentController(ApplicationDbContext db, UserManager<UserModel> user)
         {
             _db = db;
+            _user = user;
         }
 
-        [HttpPost("addComment")]
+        [HttpPost]
         public async Task<IActionResult> addComment(CommentModel cmt)
         {
-            if (ModelState.IsValid)
+            if (await _user.FindByNameAsync(cmt.userName) != null)
             {
-                if (cmt != null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    await _db.commentD.AddAsync(cmt);
-                    await _db.SaveChangesAsync();
+                    if (ModelState.IsValid)
+                    {
+                        if (cmt != null)
+                        {
+                            await _db.commentD.AddAsync(cmt);
+                            await _db.SaveChangesAsync();
+                            return PartialView("_Comment", await _db.commentD.Where(x => x.blogModelId == cmt.blogModelId).ToListAsync());
+
+                        }
+                    }
                 }
             }
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("getComment")]
-        public async Task<IActionResult> getComment(int id)
-        {
-            return Ok(await _db.commentD.Where(x => x.blogModelId == id).ToListAsync());
-        }
     }
 }
